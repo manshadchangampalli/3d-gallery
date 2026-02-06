@@ -21,7 +21,11 @@ pipeline {
                 sh "rm -rf ${PROD_DIR}/.next"
                 sh "cp -r .next ${PROD_DIR}/"
                 sh "cp package.json ${PROD_DIR}/" // Also copy package.json if needed
-                
+                sh "cp pnpm-lock.yaml ${PROD_DIR}/"
+
+                dir("${PROD_DIR}"){
+                   sh "pnpm install"
+                }
                 // 2. Tell PM2 to refresh the app with the new files
                 sh "pm2 reload my-next-app"
                 
