@@ -18,10 +18,11 @@ pipeline {
         stage('Deploy') {
             steps {
                 // 1. Move the new build to your Desktop folder
-                sh "rm -rf ${PROD_DIR}/.next"
+                sh "rm -rf ${PROD_DIR}/.next ${PROD_DIR}/public"
                 sh "cp -r .next ${PROD_DIR}/"
                 sh "cp package.json ${PROD_DIR}/" // Also copy package.json if needed
                 sh "cp pnpm-lock.yaml ${PROD_DIR}/"
+                sh "cp -r public ${PROD_DIR}"
 
                 dir("${PROD_DIR}"){
                    sh "pnpm install"
