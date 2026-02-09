@@ -22,7 +22,7 @@ pipeline {
                 sh "cp -r .next ${PROD_DIR}/"
                 sh "cp package.json ${PROD_DIR}/" // Also copy package.json if needed
                 sh "cp pnpm-lock.yaml ${PROD_DIR}/"
-                sh "cp -r public ${PROD_DIR}"
+                sh "cp -r public ${PROD_DIR}" 
 
                 dir("${PROD_DIR}"){
                    sh "pnpm install"
